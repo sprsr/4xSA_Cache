@@ -1,6 +1,6 @@
 // memory.v
 // @sprsr
-module memory(
+module memory
 #(  parameter CACHE_LINES = 256,
     parameter LINE_SIZE_BYTES   = 64,
     parameter LRU_BITS = 1,
