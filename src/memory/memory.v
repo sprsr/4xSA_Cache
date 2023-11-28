@@ -17,16 +17,18 @@ module memory(
     output                               o_cache_hit
 );
 
+parameter LINE_WIDTH = (VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SIZE_BYTES * 8));
 
 reg [((VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SIZE_BYTES * 8))) - 1 : 0] cache [0:(CACHE_LINES - 1)] [0: WAYS - 1];
+wire [WAYS - 1 : 0] hit;
 
 generate
     genvar i;
     for (i = 0; i < WAYS) begin
         Comparator #() u_inst_comparator (
-            .i_a(),
-            .i_b(),
-            .o_y()
+            .i_a(cache[i_index][WAY][(LINE_WIDTH - VALID_BITS - LRU_BITS - DIRTY_BITS - 1) -: TAG_BITS]),
+            .i_b(i_tag),
+            .o_y(hit[WAY])
         );
     end
 endgenerate
