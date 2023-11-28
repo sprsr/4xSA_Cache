@@ -5,7 +5,8 @@ module memory(
     parameter VALID_BITS = 1,
     parameter DIRTY_BITS = 1,
     parameter TAG_BITS = 18,
-    parameter DATA_WIDTH = 32)
+    parameter DATA_WIDTH = 32,
+    parameter WAYS = 4)
 
 (
     input                                clk,
@@ -17,10 +18,21 @@ module memory(
 );
 
 
-reg cache [((VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SIZE_BYTES * 8)) * CACHE_LINES) - 1 : 0];
+reg [((VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SIZE_BYTES * 8))) - 1 : 0] cache [0:(CACHE_LINES - 1)] [0: WAYS - 1];
+
+generate
+    genvar i;
+    for (i = 0; i < WAYS) begin
+        Comparator #() u_inst_comparator (
+            .i_a(),
+            .i_b(),
+            .o_y()
+        );
+    end
+endgenerate
 
 always @(posedge clk or posedge rst) begin
-    if 
 
+end
 
 
