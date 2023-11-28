@@ -27,7 +27,7 @@ wire [WAYS - 1 : 0] hit;
 //Generate comparator for each WAY
 generate
     genvar i;
-    for (i = 0; i < WAYS) begin
+    for (i = 0; i < WAYS; i= i+1) begin
         Comparator #() u_inst_comparator (
             .i_a(cache[i_index][WAY][(LINE_WIDTH - VALID_BITS - LRU_BITS - DIRTY_BITS - 1) -: TAG_BITS]),
             .i_b(i_tag),
