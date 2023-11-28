@@ -1,3 +1,5 @@
+// memory.v
+// @sprsr
 module memory(
 #(  parameter CACHE_LINES = 256,
     parameter LINE_SIZE_BYTES   = 64,
@@ -22,6 +24,7 @@ parameter LINE_WIDTH = (VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SI
 reg [((VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SIZE_BYTES * 8))) - 1 : 0] cache [0:(CACHE_LINES - 1)] [0: WAYS - 1];
 wire [WAYS - 1 : 0] hit;
 
+//Generate comparator for each WAY
 generate
     genvar i;
     for (i = 0; i < WAYS) begin
