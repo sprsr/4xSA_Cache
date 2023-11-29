@@ -1,6 +1,6 @@
-// 4-to-1 Multiplexer Module
+// 1-to-1 Multiplexer Module
 
-module fourToOneMux 
+module one_to_one_mux 
 #( parameter DATA_WIDTH = 32,
    parameter INPUTS     = 4)
 (
