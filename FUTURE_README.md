@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="docs/riscv pic.png" alt="Project logo"></a>
+ <img width=709px height=407px src="Diagrams/set_associative_cache.jpg" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Set Associative Cache</h3>
@@ -8,16 +8,16 @@
 <div align="center">
 
   [![Status](https://img.shields.io/badge/status-active-success.svg)]() 
-  [![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/sprsr/rv32_processor/issues)
-  [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/sprsr/rv32_processor/pulls)
+  [![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/sprsr/4xSA_Cache/issues)
+  [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/sprsr/4xSA_Cache/pulls)
   [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
 
 ---
 
-<p align="center"> A simple 5 stage pipeline processor in conformance with RISC V Standards.  <br>
-  A single core capable of handling every RV32I Instruction.  Minimal verification has been conducted thusfar, however the framework to run simulations and view waveforms are in place.
+<p align="center"> A modular and customizable set associative cache. <br>
+  Developed to be implemented into my 32 bit risc v core. This implementation of set associative will use a relative LRU algorithm.  Metadata is kept simple, with single bits: VALID, DIRTY, LRU (excluding tag).  Cache parameters can be manimpulated for custom caches. 
     <br> 
 </p>
 
