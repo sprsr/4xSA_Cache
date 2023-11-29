@@ -16,7 +16,7 @@
 
 ---
 
-<p align="center"> A modular and customizable set associative cache. <br>
+<p align="center"> A modular and customizable set associative cache.
   Developed to be implemented into my 32 bit risc v core. This implementation of set associative will use a relative LRU algorithm.  Metadata is kept simple, with single bits: VALID, DIRTY, LRU (excluding tag).  Cache parameters can be manimpulated for custom caches. 
     <br> 
 </p>
