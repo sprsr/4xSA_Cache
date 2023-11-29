@@ -21,6 +21,11 @@
     <br> 
 </p>
 
+<p align="center">
+  <a href="" rel="noopener">
+ <img width=1404px height=1872px src="Diagrams/Cache Block Diagram.png" alt="Cache Structure"></a>
+</p>
+
 ## 📝 Table of Contents
 - [About](#about)
 - [Getting Started](#getting_started)
