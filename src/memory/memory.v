@@ -23,6 +23,7 @@ parameter LINE_WIDTH = (VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SI
 
 reg [((VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SIZE_BYTES * 8))) - 1 : 0] cache [0:(CACHE_LINES - 1)] [0: WAYS - 1];
 wire [WAYS - 1 : 0] hit;
+wire [WAYS - 1 : 0] mux_sel;
 
 //Generate comparator for each WAY
 generate
@@ -31,8 +32,14 @@ generate
         Comparator #() u_inst_comparator (
             .i_a(cache[i_index][WAY][(LINE_WIDTH - VALID_BITS - LRU_BITS - DIRTY_BITS - 1) -: TAG_BITS]),
             .i_b(i_tag),
-            .o_y(hit[WAY])
+            .o_y(hit[i])
         );
+        AND #() u_inst_and (
+            .i_a(hit[i]),
+            .i_b(cache[i_index][i][LINE_WIDTH - 1])
+            .o_y(mux_sel[i])
+        );
+
     end
 endgenerate
 
