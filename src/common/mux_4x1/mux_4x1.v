@@ -4,11 +4,11 @@ module fourToOneMux
 #( parameter DATA_WIDTH = 32,
    parameter INPUTS     = 4)
 (
-  input wire [DATA_WIDTH - 1 : 0] i_data [INPUTS - 1: 0],   
-  input wire  [INPUTS - 1: 0]     i_sel,
-  output wire [DATA_WIDTH -1 : 0] o_y 
+  input wire  [DATA_WIDTH - 1 : 0] i_data [INPUTS - 1: 0],   
+  input wire  [INPUTS - 1: 0]      i_sel,
+  output wire [DATA_WIDTH - 1 : 0] o_y 
 );
-reg [DATA_WIDTH -1 : 0] r_y = 'h0;
+reg [DATA_WIDTH - 1 : 0] r_y = 'h0;
 
 generate
     genvar i;
