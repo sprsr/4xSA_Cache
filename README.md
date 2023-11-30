@@ -25,3 +25,8 @@
   <a href="" rel="noopener">
  <img width=1404px height=1872px src="Diagrams/Cache Block Diagram.png" alt="Cache Structure"></a>
 </p>
+
+<p align="center"> Things to do. <br>
+  I need to add a tagging mechanism
+    <br> 
+</p>
