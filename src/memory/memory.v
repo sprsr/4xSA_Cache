@@ -9,8 +9,6 @@ module memory
     parameter DATA_WIDTH = 32,
     parameter ADDRESS_WIDTH = 32,
     parameter LINE_SIZE_BITS = LINE_SIZE_BYTES*8,
-    parameter OFFSET_WIDTH  = $log2(LINE_SIZE_BYTES),
-    parameter INDEX_WIDTH   = $log2(CACHE_LINES),
     parameter TAG_BITS = ADDRESS_WIDTH - (INDEX_WIDTH + OFFSET_WIDTH),
     parameter LINE_WIDTH = (VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SIZE_BYTES * 8)),
     parameter WAYS = 4)
@@ -24,7 +22,9 @@ module memory
         output                               o_cache_hit
     );
 
-    localparam ADDRESS_TAG = i_address[ADDRESS_WIDTH -1 -: TAG_BITS];
+    localparam OFFSET_WIDTH  = $log2(LINE_SIZE_BYTES);
+    localparam INDEX_WIDTH   = $log2(CACHE_LINES);
+    localparam ADDRESS_TAG = i_address[(ADDRESS_WIDTH - 1) -: TAG_BITS];
     localparam ADDRESS_INDEX = i_address[ADDRESS_WIDTH - TAG_BITS - 1 -: INDEX_WIDTH];
     localparam ADDRESS_OFFSET = i_address[ADDRESS_WIDTH - TAG_BITS - INDEX_WIDTH - 1 -: OFFSET_WIDTH];
 
