@@ -47,23 +47,28 @@ In the set-associative cache, the memory address consists of three parts: the ta
 Here's a breakdown of the components in a memory address for a set-associative cache:
 
     Tag:
-        The tag bits uniquely identify a particular block of data within a set. <br>The tag bits are used to check if the requested data is present in the cache.
+        The tag bits uniquely identify a particular block of data within a set. 
+        The tag bits are used to check if the requested data is present in the cache.
 
     Index:
-        The index bits determine which set within the cache the data belongs to. <br>It helps in selecting the set where the data should be stored or retrieved.
+        The index bits determine which set within the cache the data belongs to. 
+        It helps in selecting the set where the data should be stored or retrieved.
 
     Offset:
-        The offset bits specify the position of the data within the cache block. <br>It indicates the location of the data within the selected cache line.
+        The offset bits specify the position of the data within the cache block. 
+        It indicates the location of the data within the selected cache line.
 
 When there's a cache miss, the cache controller extracts the tag, index, and offset from the cache address. The index is used to identify the set in the cache, and the tag is compared with the tags in that set to check if the required data is present. If it's a miss, the cache controller constructs the main memory address using the tag, index, and offset bits.
 
 The main memory address construction is done as follows:
 
     Combine Tag and Index:
-        Concatenate the tag and index bits to form the main memory address. This address is used to access the set in main memory where the required data is stored.
+        Concatenate the tag and index bits to form the main memory address. 
+        This address is used to access the set in main memory where the required data is stored.
 
     Add Offset:
-        Add the offset to the constructed main memory address to specify the exact location within the block in main memory where the data is stored.
+        Add the offset to the constructed main memory address to specify 
+        the exact location within the block in main memory where the data is stored.
 
 This main memory address is then used to initiate a request to the main memory subsystem to fetch the required data. Once the data is fetched, it is brought into the cache, and subsequent accesses to the same address can be served from the cache until the data is evicted or invalidated.
 
