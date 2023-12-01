@@ -28,7 +28,7 @@
 
 ## 📝 Table of Contents
 - [About](#about)
-- [Getting Started](#getting_started)
+- [Cache Misses](#cache_misses)
 - [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
@@ -41,8 +41,31 @@
 This project was started to gain experience in digital design and brush up on chip architecture while becoming equipped with RISC V ISA.  RTL is described in Verilog 2012 and EDA tools consist of Icarus Verilog & Yosys. I also found the open source risc v assembler python package provided by _ very useful when testing in my Test Bench.  
 The RV32 Processor is architected as a single core standard 5 stage pipeline.  Only Fetch and Decode stages will stall in two cases:  Failed Branch Prediction and sequential data conflict when the first instruction must write from data memory.  
 
-## 🏁 Getting Started <a name = "getting_started"></a>
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+## :broken_heart: Cache Misses <a name = "cache_misses"></a>
+In the set-associative cache, the memory address consists of three parts: the tag, index, and offset. These components help determine the location of the data within the cache. When there is a cache miss and the cache needs to fetch data from main memory, the cache address is used to construct the main memory address.
+
+Here's a breakdown of the components in a memory address for a set-associative cache:
+
+    Tag:
+        The tag bits uniquely identify a particular block of data within a set. The tag bits are used to check if the requested data is present in the cache.
+
+    Index:
+        The index bits determine which set within the cache the data belongs to. It helps in selecting the set where the data should be stored or retrieved.
+
+    Offset:
+        The offset bits specify the position of the data within the cache block. It indicates the location of the data within the selected cache line.
+
+When there's a cache miss, the cache controller extracts the tag, index, and offset from the cache address. The index is used to identify the set in the cache, and the tag is compared with the tags in that set to check if the required data is present. If it's a miss, the cache controller constructs the main memory address using the tag, index, and offset bits.
+
+The main memory address construction is done as follows:
+
+    Combine Tag and Index:
+        Concatenate the tag and index bits to form the main memory address. This address is used to access the set in main memory where the required data is stored.
+
+    Add Offset:
+        Add the offset to the constructed main memory address to specify the exact location within the block in main memory where the data is stored.
+
+This main memory address is then used to initiate a request to the main memory subsystem to fetch the required data. Once the data is fetched, it is brought into the cache, and subsequent accesses to the same address can be served from the cache until the data is evicted or invalidated.
 
 ### Prerequisites
 What things you need to install the software and how to install them.
