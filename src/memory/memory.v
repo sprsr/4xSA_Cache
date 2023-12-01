@@ -49,15 +49,14 @@ generate
         );
         data[i] = cache[i_index][i][(LINE_SIZE_BYTES*8) - 1: 0];
     end
-    one_to_one_mux #(INPUTS=WAYS) inst_one_to_one_mux (
-       .i_data(data),
-       .
-    )
 endgenerate
 
+    one_to_one_mux #() inst_one_to_one_mux (
+       .i_data(data),
+       .i_index(mux_sel),
+       .o_y(o_data)
+    )
 
-always @(posedge clk or posedge rst) begin
-
-end
+    endmodule
 
 
