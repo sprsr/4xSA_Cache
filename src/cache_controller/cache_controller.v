@@ -1,4 +1,4 @@
-module cache_controller#(
+module cache_controller
 #(  parameter CACHE_LINES = 256,
     parameter LINE_SIZE_BYTES   = 64,
     parameter LRU_BITS = 1,
