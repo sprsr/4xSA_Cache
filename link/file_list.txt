@@ -1,0 +1,4 @@
+../src/memory/memory.v
+../src/common/one_to_one_mux/one_to_one_mux.v
+../src/common/and/AND.v
+../src/common/comparator/comparator.v
