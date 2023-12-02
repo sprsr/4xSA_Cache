@@ -15,11 +15,16 @@ module cache_controller
         input                                    clk,
         input                                    rst,
         input  [TAG_BITS -1 : 0]                 i_tag,
-        input  [($log2(CACHE_LINES) - 1): 0]     i_index,
-        input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
         output [(DATA_WIDTH -1): 0]              o_data,
         output                               o_cache_hit
     );
+
+    generate
+        localparam INDEX_WIDTH = $clog2(CACHE_LINES);
+        localparam OFFSET_WIDTH = $clog2(LINE_SIZE_BYTES);
+    endgenerate
+    input  [($log2(INDEX_WIDTH) - 1): 0]     i_index,
+    input  [($log2(OFFSET_WIDTH) - 1): 0] i_offset,
 
     localparam LINE_SIZE_BITS = LINE_SIZE_BYTES * 8;
     localparam LINE_WIDTH = (VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SIZE_BYTES * 8));
