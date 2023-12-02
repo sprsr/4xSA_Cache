@@ -7,6 +7,8 @@ module cache_controller
     parameter VALID_BITS = 1,
     parameter DIRTY_BITS = 1,
     parameter TAG_BITS = 18,
+    parameter INDEX_BITS = 8,
+    parameter OFFSET_BITS = 6,
     parameter DATA_WIDTH = 32,
     parameter ADDRESS_WIDTH = 32,
     parameter WAYS = 4)
@@ -15,9 +17,11 @@ module cache_controller
         input                                    clk,
         input                                    rst,
         input  [TAG_BITS -1 : 0]                 i_tag,
-        input  [($log2(CACHE_LINES) - 1): 0]     i_index,
-        input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
-        output [(DATA_WIDTH -1): 0]              o_data,
+        //input  [($log2(CACHE_LINES) - 1): 0]     i_index,
+        input  [(INDEX_BITS - 1): 0]     i_index,
+        //input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
+        input  [(OFFSET_BITS - 1): 0] i_offset,
+        output [(LINE_SIZE_BITS -1): 0]              o_data,
         output                               o_cache_hit
     );
 
@@ -55,7 +59,7 @@ module cache_controller
 
     one_to_one_mux #() inst_one_to_one_mux (
         .i_data(data),
-        .i_index(mux_sel),
+        .i_sel(mux_sel),
         .o_y(o_data)
     );
 
