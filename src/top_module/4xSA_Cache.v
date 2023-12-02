@@ -28,6 +28,6 @@ cache_controller #() inst_controller (
     .i_tag(i_addr[(ADDRESS_WIDTH - 1)-:TAG_BITS]),
     .i_index(i_addr[(ADDRESS_WIDTH - TAG_BITS - 1) -: INDEX_BITS]),
     .o_data(data_line),
-    .o_cache_hit
+    .o_cache_hit(hit)
 );
 
