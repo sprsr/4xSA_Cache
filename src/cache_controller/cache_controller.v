@@ -21,12 +21,12 @@ module cache_controller
         input                                       memRW,
         output [DATA_WIDTH - 1:0]                   o_data,
         input  [TAG_BITS -1 : 0]                    i_tag,
-        //input  [($log2(CACHE_LINES) - 1): 0]     i_index,
-        input  [(INDEX_BITS - 1): 0]                 i_index,
-        //input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
+        input  [(INDEX_BITS - 1): 0]                i_index,
         input  [(OFFSET_BITS - 1): 0]                i_offset,
-        output [(LINE_SIZE_BITS -1): 0]              o_data,
+        output reg [(LINE_SIZE_BITS -1): 0]              o_data,
         output                                       o_cache_hit
+        //input  [($log2(CACHE_LINES) - 1): 0]     i_index,
+        //input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
     );
 
     localparam LINE_SIZE_BITS = LINE_SIZE_BYTES * 8;
@@ -67,6 +67,11 @@ module cache_controller
         .i_sel(mux_sel),
         .o_y(o_data)
     );
+    always @(posedge clk or posedge rst) begin
+        if (memRW) begin
+        
+        end else begin
+
 
     endmodule
 
