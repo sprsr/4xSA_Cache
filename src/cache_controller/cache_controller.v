@@ -14,11 +14,17 @@ module cache_controller
     parameter WAYS = 4)
 
     (
-        input  [TAG_BITS -1 : 0]                 i_tag,
+        input                                       clk,
+        input                                       rst,
+        input  [ADDRESS_WIDTH - 1:0]                i_addr,
+        input  [DATA_WIDTH - 1:0]                   dataW,
+        input                                       memRW,
+        output [DATA_WIDTH - 1:0]                   o_data,
+        input  [TAG_BITS -1 : 0]                    i_tag,
         //input  [($log2(CACHE_LINES) - 1): 0]     i_index,
-        input  [(INDEX_BITS - 1): 0]     i_index,
+        input  [(INDEX_BITS - 1): 0]                 i_index,
         //input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
-        //input  [(OFFSET_BITS - 1): 0] i_offset,
+        input  [(OFFSET_BITS - 1): 0]                i_offset,
         output [(LINE_SIZE_BITS -1): 0]              o_data,
         output                                       o_cache_hit
     );
