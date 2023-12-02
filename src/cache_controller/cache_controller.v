@@ -22,7 +22,7 @@ module cache_controller
         //input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
         input  [(OFFSET_BITS - 1): 0] i_offset,
         output [(LINE_SIZE_BITS -1): 0]              o_data,
-        output                               o_cache_hit
+        output                                       o_cache_hit
     );
 
     localparam LINE_SIZE_BITS = LINE_SIZE_BYTES * 8;
@@ -32,6 +32,7 @@ module cache_controller
     wire [WAYS - 1 : 0] hit;
     reg [(LINE_SIZE_BYTES * 8) - 1: 0] data [WAYS - 1: 0];
     wire [WAYS - 1 : 0] mux_sel;
+    assign o_cache_hit = hit;
 
     initial begin 
         for (integer i = 0; i < WAYS; i= i+1) begin
