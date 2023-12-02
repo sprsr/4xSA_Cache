@@ -30,11 +30,11 @@ module cache_controller
 
     reg [LINE_WIDTH - 1 : 0] cache [0:(CACHE_LINES - 1)] [0: WAYS - 1];
     wire [WAYS - 1 : 0] hit;
-    wire [(LINE_SIZE_BYTES * 8) - 1: 0] data [WAYS - 1: 0];
+    reg [(LINE_SIZE_BYTES * 8) - 1: 0] data [WAYS - 1: 0];
     wire [WAYS - 1 : 0] mux_sel;
 
     initial begin 
-        for (i = 0; i < WAYS; i= i+1) begin
+        for (integer i = 0; i < WAYS; i= i+1) begin
             data[i] = cache[i_index][i][LINE_SIZE_BITS - 1: 0];
         end
     end
