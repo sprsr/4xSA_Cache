@@ -17,6 +17,17 @@ module 4xSA_Cache
     input  [31:0] i_addr,
     input  [31:0]  dataW,
     input          memRW,
-    output [31:0] o_data
+    output [31:0] o_data,
+    output        fetch_data_line = 0
+);
+
+wire data_line [(LINE_SIZE_BYTES*8):0];
+wire hit;
+
+cache_controller #() inst_controller (
+    .i_tag(i_addr[(ADDRESS_WIDTH - 1)-:TAG_BITS]),
+    .i_index(i_addr[(ADDRESS_WIDTH - TAG_BITS - 1) -: INDEX_BITS]),
+    .o_data(data_line),
+    .o_cache_hit
 );
 
