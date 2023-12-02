@@ -14,8 +14,6 @@ module cache_controller
     parameter WAYS = 4)
 
     (
-        input                                    clk,
-        input                                    rst,
         input  [TAG_BITS -1 : 0]                 i_tag,
         //input  [($log2(CACHE_LINES) - 1): 0]     i_index,
         input  [(INDEX_BITS - 1): 0]     i_index,
