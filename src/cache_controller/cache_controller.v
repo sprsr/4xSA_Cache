@@ -18,7 +18,7 @@ module cache_controller
         //input  [($log2(CACHE_LINES) - 1): 0]     i_index,
         input  [(INDEX_BITS - 1): 0]     i_index,
         //input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
-        input  [(OFFSET_BITS - 1): 0] i_offset,
+        //input  [(OFFSET_BITS - 1): 0] i_offset,
         output [(LINE_SIZE_BITS -1): 0]              o_data,
         output                                       o_cache_hit
     );
