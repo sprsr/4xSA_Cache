@@ -1,6 +1,6 @@
 // memory.v
 // @sprsr
-module cache_controller 
+module SA_Cache 
 #(  parameter CACHE_LINES = 256,
     parameter LINE_SIZE_BYTES   = 64,
     parameter LRU_BITS = 1,
@@ -26,7 +26,7 @@ module cache_controller
         input  [(INDEX_BITS - 1): 0]                i_index,
         input  [(OFFSET_BITS - 1): 0]               i_offset,
         output reg [(LINE_SIZE_BITS -1): 0]         o_data,
-        output reg                                  cache_miss
+        output                                      cache_miss
         //input  [($log2(CACHE_LINES) - 1): 0]     i_index,
         //input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
     );
@@ -34,18 +34,17 @@ module cache_controller
     localparam LINE_SIZE_BITS = LINE_SIZE_BYTES * 8;
     localparam LINE_WIDTH = (VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SIZE_BYTES * 8));
 
-    reg [LINE_WIDTH - 1 : 0] cache [0:(CACHE_LINES - 1)] [0: WAYS - 1];
-    wire [WAYS - 1 : 0] hit;
+    reg [LINE_WIDTH - 1 : 0]           cache [0:(CACHE_LINES - 1)] [0: WAYS - 1];
+    wire [WAYS - 1 : 0]                hit;
     reg [(LINE_SIZE_BYTES * 8) - 1: 0] data [WAYS - 1: 0];
-    wire [WAYS - 1 : 0] mux_sel;
-    reg [$clog2(WAYS)-1:0] way_index;
-    reg [$clog2(WAYS):  0] way_mem_slot;
+    wire [WAYS - 1 : 0]                mux_sel;
+    reg [$clog2(WAYS)-1:0]             way_index;
+    reg [$clog2(WAYS):  0]             way_mem_slot;
+    reg                                r_cache_miss = 1'b0;
 
-    initial begin 
-        for (integer i = 0; i < WAYS; i= i+1) begin
-            data[i] = cache[i_index][i][LINE_SIZE_BITS - 1: 0];
-        end
-    end
+
+    assign cache_miss = r_cache_miss;
+
 
     //Generate comparator for each WAY
     generate
@@ -64,7 +63,7 @@ module cache_controller
             );
         end
     endgenerate
-    
+
     one_to_one_mux #() inst_one_to_one_mux (
         .i_data(data),
         .i_sel(mux_sel),
@@ -93,52 +92,62 @@ module cache_controller
         new_line_way = 1'b0;
     endfunction
 
+    initial begin 
+        for (integer i = 0; i < WAYS; i= i+1) begin
+            data[i] = cache[i_index][i][LINE_SIZE_BITS - 1: 0];
+        end
+    end
 
 
     always @(posedge clk or posedge rst) begin
-        
+
         if (rst) begin
             o_data <= 32'b0;
-            cache_miss <= 0;
+            r_cache_miss <= 0;
+            way_mem_slot <= 0;
         end else begin
-            if (!cache_miss) begin
-            if (hit != 0) begin
-                way_index = find_hit(hit);
-                // read the cache
-                case (memRW) 
-                    1'b1: begin
-                        // Write to Cache
-                        cache[i_index][way_index][(8*i_offset) +: DATA_WIDTH] <= dataW;
-                        // Set Cache Line As Dirty
-                        cache[i_index][way_index][LINE_WIDTH - 2] <= 1'b1;
-                        //Maybe Placeholder
-                        o_data <= dataW;
-                    end
-                    1'b0: begin
-                        //Read Cache
-                        o_data <= cache[i_index][way_index][(8*i_offset) +: DATA_WIDTH];
-                    end
-                endcase
-                // set the LRU bit
-                cache[i_index][way_index][LINE_WIDTH - 3] <= 1'b1;
+            if (!r_cache_miss) begin
+                if (hit != 0) begin
+                    way_index = find_hit(hit);
+                    // read the cache
+                    case (memRW) 
+                        1'b1: begin
+                            // Write to Cache
+                            cache[i_index][way_index][(8*i_offset) +: DATA_WIDTH] <= dataW;
+                            // Set Cache Line As Dirty
+                            cache[i_index][way_index][LINE_WIDTH - 2] <= 1'b1;
+                            //Maybe Placeholder
+                            o_data <= dataW;
+                        end
+                        1'b0: begin
+                            //Read Cache
+                            o_data <= cache[i_index][way_index][(8*i_offset) +: DATA_WIDTH];
+                        end
+                    endcase
+                    // set the LRU bit
+                    cache[i_index][way_index][LINE_WIDTH - 3] <= 1'b1;
+                end else begin
+                    r_cache_miss <= 1'b1; 
+                end
             end else begin
-                cache_miss <= 1'b1; 
-            end
-        end else begin
-            if (i_memory_response) begin
-                way_mem_line = new_line_way(i_index);
-                if (cache[i_index][way_mem_line][LINE_WIDTH - 1]) begin
-                    o_evict_data <= cache[i_index][way_mem_line][LINE_SIZE_BITS-1:0];
-                    o_evict_addr[ADDRESS_WIDTH - 1 -: TAG_BITS] <= i_tag;
-                    o_evict_addr[ADDRESS_WIDTH -TAG_BITS - 1 -: INDEX_BITS] <= i_index;
-                    o_evict_addr[ADDRESS_WIDTH -TAG_BITS - INDEX_BITS - 1 -: OFFSET_BITS] <= i_offset;
-                    o_evict <= 1'b1;
-                    cache
+                if (i_memory_response) begin
+                    way_mem_slot = new_line_way(i_index);
+                    if (cache[i_index][way_mem_line][LINE_WIDTH - 1]) begin
+                        o_evict_data <= cache[i_index][way_mem_line][LINE_SIZE_BITS-1:0];
+                        o_evict_addr[ADDRESS_WIDTH - 1 -: TAG_BITS] <= i_tag;
+                        o_evict_addr[ADDRESS_WIDTH -TAG_BITS - 1 -: INDEX_BITS] <= i_index;
+                        o_evict_addr[ADDRESS_WIDTH -TAG_BITS - INDEX_BITS - 1 -: OFFSET_BITS] <= i_offset;
+                        o_evict <= 1'b1;
+                    end
+                    cache[i_index][way_mem_line][LINE_SIZE_BITS-1:0] <= i_memory_line;
                     cache[i_index][way_mem_line][LINE_WIDTH - 1] <= 1'b1;
                     cache[i_index][way_mem_line][LINE_WIDTH - 3] <= 1'b1;
+                    r_cache_miss <= 1'b0;
+                end
+            end
+        end
 
-                i_memory_line 
 
-    endmodule
+                    endmodule
 
 
