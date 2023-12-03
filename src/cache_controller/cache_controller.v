@@ -18,13 +18,15 @@ module cache_controller
         input                                       rst,
         input  [ADDRESS_WIDTH - 1:0]                i_addr,
         input  [DATA_WIDTH - 1:0]                   dataW,
+        input  [LINE_SIZE_BITS -1:0]                i_memory_line,
+        input                                       i_memory_response,
         input                                       memRW,
         output [DATA_WIDTH - 1:0]                   o_data,
         input  [TAG_BITS -1 : 0]                    i_tag,
         input  [(INDEX_BITS - 1): 0]                i_index,
         input  [(OFFSET_BITS - 1): 0]               i_offset,
         output reg [(LINE_SIZE_BITS -1): 0]         o_data,
-        output reg                                  cache_miss,
+        output reg                                  cache_miss
         //input  [($log2(CACHE_LINES) - 1): 0]     i_index,
         //input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
     );
@@ -37,6 +39,7 @@ module cache_controller
     reg [(LINE_SIZE_BYTES * 8) - 1: 0] data [WAYS - 1: 0];
     wire [WAYS - 1 : 0] mux_sel;
     reg [$clog2(WAYS)-1:0] way_index;
+    reg [$clog2(WAYS):  0] way_open_slot;
 
     initial begin 
         for (integer i = 0; i < WAYS; i= i+1) begin
@@ -67,14 +70,30 @@ module cache_controller
         .i_sel(mux_sel),
         .o_y(o_data)
     );
+
     function find_hit(input [WAYS-1:0] hit);
         find_hit = 0;
         for (integer i = 0; i< WAYS; i=i+1) begin
             if (hit[i] == 1'b1) begin
                 find_hit = i;
+                return;
             end
         end
     endfunction
+
+    function [WAYS:0] new_line_way (input [INDEX_BITS-1:0] index);
+        for (integer i = 0; i< WAYS; i=i+1) begin
+            if (!cache[index][i][LINE_WIDTH - 1]) begin
+                new_line_way = i;
+                return;
+            end else begin
+                cache[index][i][LINE_WIDTH - 1] = 1'b0;
+            end
+        end
+        new_line_way = WAYS + 1'b1;
+    endfunction
+
+
 
     always @(posedge clk or posedge rst) begin
         
@@ -82,7 +101,7 @@ module cache_controller
             o_data <= 32'b0;
             cache_miss <= 0;
         end else begin
-            if (!cache_miss)
+            if (!cache_miss) begin
             if (hit != 0) begin
                 way_index = find_hit(hit);
                 // read the cache
@@ -104,6 +123,10 @@ module cache_controller
                 cache[i_index][way_index][LINE_WIDTH - 3] <= 1'b1;
             end else begin
                 cache_miss <= 1'b1; 
+            end
+        end else begin
+            if (i_memory_response) begin
+                i_memory_line
 
     endmodule
 
