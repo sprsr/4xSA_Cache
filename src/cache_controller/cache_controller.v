@@ -61,17 +61,26 @@ module cache_controller
             );
         end
     endgenerate
-
+    
     one_to_one_mux #() inst_one_to_one_mux (
         .i_data(data),
         .i_sel(mux_sel),
         .o_y(o_data)
     );
+    function find_hit(input [WAYS-1:0] hit);
+        find_hit = 0;
+        for (integer i = 0; i< WAYS; i=i+1) begin
+            if (hit[i] == 1'b1) begin
+                find_hit = i;
+            end
+        end
+    endfunction
+
     always @(posedge clk or posedge rst) begin
         if (memRW) begin
         
         end else begin
-
+            if (hit != 0) begin
 
     endmodule
 
