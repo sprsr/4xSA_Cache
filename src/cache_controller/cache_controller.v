@@ -22,9 +22,9 @@ module cache_controller
         output [DATA_WIDTH - 1:0]                   o_data,
         input  [TAG_BITS -1 : 0]                    i_tag,
         input  [(INDEX_BITS - 1): 0]                i_index,
-        input  [(OFFSET_BITS - 1): 0]                i_offset,
-        output reg [(LINE_SIZE_BITS -1): 0]              o_data,
-        output                                       o_cache_hit
+        input  [(OFFSET_BITS - 1): 0]               i_offset,
+        output reg [(LINE_SIZE_BITS -1): 0]         o_data,
+        output [WAYS-1:0]                           o_cache_hit
         //input  [($log2(CACHE_LINES) - 1): 0]     i_index,
         //input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
     );
@@ -83,6 +83,11 @@ module cache_controller
         end else begin
             if (hit != 0) begin
                 way_index = find_hit(hit);
+                // read the cache
+                o_data <= cache[i_index][way_index][(8*i_offset) +: DATA_WIDTH];
+                // set the LRU bit
+                cache[i_index][way_index][LINE_WIDTH - 3] <= 1'b1;
+            end
     endmodule
 
 
