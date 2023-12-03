@@ -36,6 +36,7 @@ module cache_controller
     wire [WAYS - 1 : 0] hit;
     reg [(LINE_SIZE_BYTES * 8) - 1: 0] data [WAYS - 1: 0];
     wire [WAYS - 1 : 0] mux_sel;
+    reg [$clog2(WAYS)-1:0] way_index;
     assign o_cache_hit = hit;
 
     initial begin 
@@ -81,7 +82,7 @@ module cache_controller
         
         end else begin
             if (hit != 0) begin
-
+                way_index = find_hit(hit);
     endmodule
 
 
