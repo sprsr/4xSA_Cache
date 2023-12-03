@@ -24,7 +24,7 @@ module cache_controller
         input  [(INDEX_BITS - 1): 0]                i_index,
         input  [(OFFSET_BITS - 1): 0]               i_offset,
         output reg [(LINE_SIZE_BITS -1): 0]         o_data,
-        output [WAYS-1:0]                           o_cache_hit
+        output reg                                  cache_miss,
         //input  [($log2(CACHE_LINES) - 1): 0]     i_index,
         //input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
     );
@@ -37,7 +37,6 @@ module cache_controller
     reg [(LINE_SIZE_BYTES * 8) - 1: 0] data [WAYS - 1: 0];
     wire [WAYS - 1 : 0] mux_sel;
     reg [$clog2(WAYS)-1:0] way_index;
-    assign o_cache_hit = hit;
 
     initial begin 
         for (integer i = 0; i < WAYS; i= i+1) begin
@@ -78,16 +77,34 @@ module cache_controller
     endfunction
 
     always @(posedge clk or posedge rst) begin
-        if (memRW) begin
         
+        if (rst) begin
+            o_data <= 32'b0;
+            cache_miss <= 0;
         end else begin
+            if (!cache_miss)
             if (hit != 0) begin
                 way_index = find_hit(hit);
                 // read the cache
-                o_data <= cache[i_index][way_index][(8*i_offset) +: DATA_WIDTH];
+                case (memRW) 
+                    1'b1: begin
+                        // Write to Cache
+                        cache[i_index][way_index][(8*i_offset) +: DATA_WIDTH] <= dataW;
+                        // Set Cache Line As Dirty
+                        cache[i_index][way_index][LINE_WIDTH - 2] <= 1'b1;
+                        //Maybe Placeholder
+                        o_data <= dataW;
+                    end
+                    1'b0: begin
+                        //Read Cache
+                        o_data <= cache[i_index][way_index][(8*i_offset) +: DATA_WIDTH];
+                    end
+                endcase
                 // set the LRU bit
                 cache[i_index][way_index][LINE_WIDTH - 3] <= 1'b1;
-            end
+            end else begin
+                cache_miss <= 1'b1; 
+
     endmodule
 
 
