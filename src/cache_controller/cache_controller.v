@@ -132,6 +132,9 @@ module cache_controller
                     o_evict_addr[ADDRESS_WIDTH - 1 -: TAG_BITS] <= i_tag;
                     o_evict_addr[ADDRESS_WIDTH -TAG_BITS - 1 -: INDEX_BITS] <= i_index;
                     o_evict_addr[ADDRESS_WIDTH -TAG_BITS - INDEX_BITS - 1 -: OFFSET_BITS] <= i_offset;
+                    o_evict <= 1'b1;
+                    cache                    
+                    cache[i_index][way_mem_line][LINE_WIDTH - 1]
 
                 i_memory_line 
 
