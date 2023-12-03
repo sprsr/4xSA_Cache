@@ -39,7 +39,7 @@ module cache_controller
     reg [(LINE_SIZE_BYTES * 8) - 1: 0] data [WAYS - 1: 0];
     wire [WAYS - 1 : 0] mux_sel;
     reg [$clog2(WAYS)-1:0] way_index;
-    reg [$clog2(WAYS):  0] way_open_slot;
+    reg [$clog2(WAYS):  0] way_mem_slot;
 
     initial begin 
         for (integer i = 0; i < WAYS; i= i+1) begin
@@ -81,8 +81,8 @@ module cache_controller
         end
     endfunction
 
-    function [WAYS:0] new_line_way (input [INDEX_BITS-1:0] index);
-        for (integer i = 0; i< WAYS; i=i+1) begin
+    function [$clog2(WAYS) -1:0] new_line_way (input [INDEX_BITS-1:0] index);
+        for (integer i = 0; i< (WAYS); i=i+1) begin
             if (!cache[index][i][LINE_WIDTH - 1]) begin
                 new_line_way = i;
                 return;
@@ -90,7 +90,7 @@ module cache_controller
                 cache[index][i][LINE_WIDTH - 1] = 1'b0;
             end
         end
-        new_line_way = WAYS + 1'b1;
+        new_line_way = 1'b0;
     endfunction
 
 
@@ -126,6 +126,7 @@ module cache_controller
             end
         end else begin
             if (i_memory_response) begin
+                way_mem_line = new_line_way(i_index);
                 i_memory_line
 
     endmodule
