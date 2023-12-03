@@ -21,8 +21,8 @@ module 4xSA_Cache
     output        fetch_data_line = 0
 );
 
-wire data_line [(LINE_SIZE_BYTES*8):0];
-wire hit;
+wire [(LINE_SIZE_BYTES*8):0] data_line ;
+wire [WAYS-1:0] hit;
 
 cache_controller #() inst_controller (
     .i_tag(i_addr[(ADDRESS_WIDTH - 1)-:TAG_BITS]),
@@ -31,3 +31,15 @@ cache_controller #() inst_controller (
     .o_cache_hit(hit)
 );
 
+    always @(posedge clk or posedge rst) begin
+        if (memRW) begin
+        
+        end else begin
+            if (hit != 0) begin
+                way_index = find_hit(hit);
+                // read the cache
+                o_data <= cache[i_index][way_index][(8*i_offset) +: DATA_WIDTH];
+                // set the LRU bit
+                cache[i_index][way_index][LINE_WIDTH - 3] <= 1'b1;
+            end
+    endmodule
