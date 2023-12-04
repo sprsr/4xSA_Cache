@@ -63,6 +63,12 @@ module SA_Cache
             );
         end
     endgenerate
+    
+    mux_4x1 #() inst_mux_4x1 (
+        .i_data(data),
+        .i_sel(mux_sel),
+        .o_y(o_data)
+    );
 
     one_to_one_mux #() inst_one_to_one_mux (
         .i_data(data),
