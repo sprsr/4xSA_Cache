@@ -21,11 +21,11 @@ module SA_Cache
         input  [LINE_SIZE_BITS -1:0]                i_memory_line,
         input                                       i_memory_response,
         input                                       memRW,
-        output [DATA_WIDTH - 1:0]                   o_data,
+        output reg [DATA_WIDTH - 1:0]                   o_data,
         input  [TAG_BITS -1 : 0]                    i_tag,
         input  [(INDEX_BITS - 1): 0]                i_index,
         input  [(OFFSET_BITS - 1): 0]               i_offset,
-        output reg [(LINE_SIZE_BITS -1): 0]         o_data,
+        output reg [(LINE_SIZE_BITS -1): 0]         line_data,
         output                                      cache_miss
         //input  [($log2(CACHE_LINES) - 1): 0]     i_index,
         //input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
@@ -72,7 +72,7 @@ module SA_Cache
     one_to_one_mux #() inst_one_to_one_mux (
         .i_data(data),
         .i_sel(mux_sel),
-        .o_y(o_data)
+        .o_y(line_data)
     );
 
     function find_hit(input [WAYS-1:0] hit);
@@ -80,21 +80,19 @@ module SA_Cache
         for (integer i = 0; i< WAYS; i=i+1) begin
             if (hit[i] == 1'b1) begin
                 find_hit = i;
-                return;
             end
         end
     endfunction
 
     function [$clog2(WAYS) -1:0] new_line_way (input [INDEX_BITS-1:0] index);
+        new_line_way = 1'b0;
         for (integer i = 0; i< (WAYS); i=i+1) begin
             if (!cache[index][i][LINE_WIDTH - 1]) begin
                 new_line_way = i;
-                return;
             end else begin
                 cache[index][i][LINE_WIDTH - 1] = 1'b0;
             end
         end
-        new_line_way = 1'b0;
     endfunction
 
     initial begin 
@@ -103,6 +101,10 @@ module SA_Cache
         end
     end
 
+    always @(*) begin
+        way_index = find_hit(hit);
+        way_mem_slot = new_line_way(i_index);
+    end
 
     always @(posedge clk or posedge rst) begin
 
@@ -113,7 +115,6 @@ module SA_Cache
         end else begin
             if (!r_cache_miss) begin
                 if (hit != 0) begin
-                    way_index = find_hit(hit);
                     // read the cache
                     case (memRW) 
                         1'b1: begin
@@ -136,7 +137,6 @@ module SA_Cache
                 end
             end else begin
                 if (i_memory_response) begin
-                    way_mem_slot = new_line_way(i_index);
                     if (cache[i_index][way_mem_line][LINE_WIDTH - 1]) begin
                         o_evict_data <= cache[i_index][way_mem_line][LINE_SIZE_BITS-1:0];
                         o_evict_addr[ADDRESS_WIDTH - 1 -: TAG_BITS] <= i_tag;
@@ -151,6 +151,7 @@ module SA_Cache
                 end
             end
         end
+    end
 
 
                     endmodule
