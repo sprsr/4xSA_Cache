@@ -70,11 +70,11 @@ module SA_Cache
         .o_y(o_data)
     );
 
-    one_to_one_mux #() inst_one_to_one_mux (
+/*    one_to_one_mux #() inst_one_to_one_mux (
         .i_data(data),
         .i_sel(mux_sel),
         .o_y(o_data)
-    );
+    );*/
 
     function find_hit(input [WAYS-1:0] hit);
         find_hit = 0;

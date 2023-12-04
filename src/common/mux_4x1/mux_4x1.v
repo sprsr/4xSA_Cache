@@ -1,7 +1,7 @@
 module mux_4x_1 
 #( parameter LINE_SIZE_BYTES = 64)
 (
-  input wire  [(LINE_SIZE_BYTES*8) - 1 : 0] i_data [3: 0],   
+  input wire  [(LINE_SIZE_BYTES*8) - 1 : 0] [3: 0] i_data ,   
   input wire  [3: 0]      i_sel,
   output wire [(LINE_SIZE_BYTES*8) - 1 : 0] o_y 
 );
