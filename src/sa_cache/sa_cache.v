@@ -74,8 +74,12 @@ module SA_Cache
         .i_sel(mux_sel),
         .o_y(line_data)
     );
+    set_detect #() inst_set_detect(
+        .hit(hit),
+        .set(way_index)
+    );
 
-    function find_hit(input [WAYS-1:0] hit);
+/*    function find_hit(input [WAYS-1:0] hit);
         find_hit = 0;
         for (integer i = 0; i< WAYS; i=i+1) begin
             if (hit[i] == 1'b1) begin
@@ -83,7 +87,7 @@ module SA_Cache
             end
         end
     endfunction
-
+*/
     function [$clog2(WAYS) -1:0] new_line_way (input [INDEX_BITS-1:0] index);
         new_line_way = 1'b0;
         for (integer i = 0; i< (WAYS); i=i+1) begin
@@ -101,10 +105,6 @@ module SA_Cache
         end
     end
 
-    always @(*) begin
-        way_index = find_hit(hit);
-        way_mem_slot = new_line_way(i_index);
-    end
 
     always @(posedge clk or posedge rst) begin
 
@@ -137,6 +137,7 @@ module SA_Cache
                 end
             end else begin
                 if (i_memory_response) begin
+                    way_mem_slot = new_line_way(i_index);
                     if (cache[i_index][way_mem_line][LINE_WIDTH - 1]) begin
                         o_evict_data <= cache[i_index][way_mem_line][LINE_SIZE_BITS-1:0];
                         o_evict_addr[ADDRESS_WIDTH - 1 -: TAG_BITS] <= i_tag;
