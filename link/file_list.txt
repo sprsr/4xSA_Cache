@@ -1,4 +1,4 @@
 ../src/sa_cache/sa_cache.v
-../src/common/one_to_one_mux/one_to_one_mux.v
+../src/common/mux_4x1/mux_4x1.v
 ../src/common/and/and.v
 ../src/common/comparator/comparator.v
