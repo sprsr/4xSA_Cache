@@ -40,8 +40,7 @@
 - [Acknowledgments](#acknowledgement)
 
 ## 🧐 About <a name = "about"></a>
-This project was started to gain experience in digital design and brush up on chip architecture while becoming equipped with RISC V ISA.  RTL is described in Verilog 2012 and EDA tools consist of Icarus Verilog & Yosys. I also found the open source risc v assembler python package provided by _ very useful when testing in my Test Bench.  
-The RV32 Processor is architected as a single core standard 5 stage pipeline.  Only Fetch and Decode stages will stall in two cases:  Failed Branch Prediction and sequential data conflict when the first instruction must write from data memory.  
+This project was started to add a more practical cache implementation to my risc v pipeline.  The intended use for the cache is a 4 way set association,  256 cache lines, 18 tag bits, 64 byte cache lines, and 32 bit addresses and data.  This implementation allows for writing to memory, but could also be used as a read only/ instruction cache.
 
 ## :broken_heart: Cache Misses <a name = "cache_misses"></a>
 In the set-associative cache, the memory address consists of three parts: the tag, index, and offset. These components help determine the location of the data within the cache. When there is a cache miss and the cache needs to fetch data from main memory, the cache address is used to construct the main memory address.
@@ -74,7 +73,7 @@ The main memory address construction is done as follows:
 
 This main memory address is then used to initiate a request to the main memory subsystem to fetch the required data. Once the data is fetched, it is brought into the cache, and subsequent accesses to the same address can be served from the cache until the data is evicted or invalidated.
 
-### Prerequisites
+### Eviction
 What things you need to install the software and how to install them.
 
 ```
