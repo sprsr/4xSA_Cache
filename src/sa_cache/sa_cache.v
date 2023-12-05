@@ -124,6 +124,11 @@ module SA_Cache
             if (!r_cache_miss) begin
                 if (hit != 0) begin
                     // read the cache
+                    case (hit)
+                        4'b0000: way_index <= 0;
+                        4'b0010: way_index <= 1;
+                        4'b0100: way_index <= 2;
+                        4'b1000: way_index <= 3;
                     case (memRW) 
                         1'b1: begin
                             // Write to Cache
