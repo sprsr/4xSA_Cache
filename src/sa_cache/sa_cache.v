@@ -79,7 +79,7 @@ module SA_Cache
         .o_y(line_data)
     );
 
-/*    function find_hit(input [WAYS-1:0] hit);
+    function find_hit(input [WAYS-1:0] hit);
         find_hit = 0;
         for (integer i = 0; i< WAYS; i=i+1) begin
             if (hit[i] == 1'b1) begin
@@ -87,7 +87,7 @@ module SA_Cache
             end
         end
     endfunction
-*/
+
     function [$clog2(WAYS) -1:0] new_line_way (input [INDEX_BITS-1:0] index);
         new_line_way = 1'b0;
         for (integer i = 0; i< (WAYS); i=i+1) begin
@@ -116,6 +116,7 @@ module SA_Cache
             if (!r_cache_miss) begin
                 if (hit != 0) begin
                     // read the cache
+                    way_index = find_hit(hit);
                     case (hit)
                         4'b0000: way_index <= 0;
                         4'b0010: way_index <= 1;
@@ -143,6 +144,7 @@ module SA_Cache
                 end
             end else begin
                 if (i_memory_response) begin
+                    /*
                     if (!cache[i_index][0][LINE_WIDTH - 1])
                         way_mem_slot = 2'h0;
                     else begin 
@@ -165,7 +167,7 @@ module SA_Cache
                             end
                         end
                     end
-                    
+                   */ 
                     way_mem_slot = new_line_way(i_index);
                     if (cache[i_index][way_mem_slot][LINE_WIDTH - 1]) begin
                         o_evict_data <= cache[i_index][way_mem_slot][LINE_SIZE_BITS-1:0];
