@@ -23,11 +23,6 @@
     <br> 
 </p>
 
-<p align="center">
-  <a href="" rel="noopener">
- <img width=1404px height=1872px src="Diagrams/Cache Block Diagram.png" alt="Cache Structure"></a>
-</p>
-
 ## 📝 Table of Contents
 - [About](#about)
 - [Cache Misses](#cache_misses)
@@ -121,17 +116,15 @@ Add notes about how to use the system.
 Add additional notes about how to deploy this on a live system.
 
 ## ⛏️ Built Using <a name = "built_using"></a>
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+- [Verilog 2012](https://ece.uah.edu/~gaede/cpe526/2012%20System%20Verilog%20Language%20Reference%20Manual.pdf) - Language
+- [Icarus Verilog](https://github.com/steveicarus/iverilog) - Compiler
+- [GTKWave](https://github.com/gtkwave/gtkwave) - Waveform Simulator
+- [YoSys](https://github.com/YosysHQ/yosys) - Synthesis Suite
 
 ## ✍️ Authors <a name = "authors"></a>
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
-
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
+- [@sprsr](https://github.com/sprsr) - Design and Verification
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+- Open Source EDA Tools
+- Risc V Org
+- [Onur Mutlu](ttps://www.youtube.com/channel/UCIwQ8uOeRFgOEvBLYc3kc3g) (Computer Architecture lectures on Youtube)
