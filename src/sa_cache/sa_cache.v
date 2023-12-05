@@ -61,6 +61,14 @@ module SA_Cache
                 .i_b(cache[i_index][i][LINE_WIDTH - 1]),
                 .o_y(mux_sel[i])
             );
+            set_detect #() inst_set_detect (
+                .hit(hit),
+                .set(way_index)
+            );
+            lru_check #() inst_lru_check (
+                .
+            )
+
         end
     endgenerate
    /* 
