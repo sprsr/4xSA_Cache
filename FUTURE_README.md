@@ -26,7 +26,7 @@
 ## 📝 Table of Contents
 - [About](#about)
 - [Cache Misses](#cache_misses)
-- [Deployment](#deployment)
+- [Running Simulation](#simulation)
 - [Usage](#usage)
 - [Built Using](#built_using)
 - [TODO](../TODO.md)
@@ -112,8 +112,11 @@ Give an example
 ## 🎈 Usage <a name="usage"></a>
 Add notes about how to use the system.
 
-## 🚀 Deployment <a name = "deployment"></a>
-Add additional notes about how to deploy this on a live system.
+## 🚀 Running Simulation <a name = "simulation"></a>
+Verify iverilog and gtkwave are installed and run the following commands from root:
+
+    cd run
+    source run_cache.csh
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 - [Verilog 2012](https://ece.uah.edu/~gaede/cpe526/2012%20System%20Verilog%20Language%20Reference%20Manual.pdf) - Language
