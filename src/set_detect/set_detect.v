@@ -1,17 +1,14 @@
 module set_detect
 #( parameter WAYS = 4 )
 (
-    input [WAYS-1:0] hit,
-    output set
+    input [3:0] hit,
+    output [1:0] set
 );
 reg r_set;
 assign set = r_set;
 
 always @(*) begin
-        for (integer i = 0; i< WAYS; i=i+1) begin
-            if (hit[i] == 1'b1) begin
-                r_set = i;
-            end
-        end
+    case (hit)
+        4'b0000: r_set <= 0;
 end
 endmodule
