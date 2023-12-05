@@ -26,7 +26,11 @@ module SA_Cache
         input  [(INDEX_BITS - 1): 0]                i_index,
         input  [(OFFSET_BITS - 1): 0]               i_offset,
         output reg [(LINE_SIZE_BITS -1): 0]         line_data,
-        output                                      cache_miss
+        output                                      cache_miss,
+        output reg [DATA_WIDTH -1:0]                    o_evict_data,
+        output reg [ADDRESS_WIDTH -1:0]                    o_evict_addr,
+        output reg                                  o_evict
+
         //input  [($log2(CACHE_LINES) - 1): 0]     i_index,
         //input  [($log2(LINE_SIZE_BYTES) - 1): 0] i_offset,
     );
@@ -74,10 +78,6 @@ module SA_Cache
         .i_sel(mux_sel),
         .o_y(line_data)
     );
-    set_detect #() inst_set_detect(
-        .hit(hit),
-        .set(way_index)
-    );
 
 /*    function find_hit(input [WAYS-1:0] hit);
         find_hit = 0;
@@ -87,7 +87,7 @@ module SA_Cache
             end
         end
     endfunction
-
+*/
     function [$clog2(WAYS) -1:0] new_line_way (input [INDEX_BITS-1:0] index);
         new_line_way = 1'b0;
         for (integer i = 0; i< (WAYS); i=i+1) begin
@@ -97,7 +97,7 @@ module SA_Cache
                 cache[index][i][LINE_WIDTH - 1] = 1'b0;
             end
         end
-    endfunction */
+    endfunction 
 
     initial begin 
         for (integer i = 0; i < WAYS; i= i+1) begin
@@ -167,16 +167,16 @@ module SA_Cache
                     end
                     
                     way_mem_slot = new_line_way(i_index);
-                    if (cache[i_index][way_mem_line][LINE_WIDTH - 1]) begin
-                        o_evict_data <= cache[i_index][way_mem_line][LINE_SIZE_BITS-1:0];
+                    if (cache[i_index][way_mem_slot][LINE_WIDTH - 1]) begin
+                        o_evict_data <= cache[i_index][way_mem_slot][LINE_SIZE_BITS-1:0];
                         o_evict_addr[ADDRESS_WIDTH - 1 -: TAG_BITS] <= i_tag;
                         o_evict_addr[ADDRESS_WIDTH -TAG_BITS - 1 -: INDEX_BITS] <= i_index;
                         o_evict_addr[ADDRESS_WIDTH -TAG_BITS - INDEX_BITS - 1 -: OFFSET_BITS] <= i_offset;
                         o_evict <= 1'b1;
                     end
-                    cache[i_index][way_mem_line][LINE_SIZE_BITS-1:0] <= i_memory_line;
-                    cache[i_index][way_mem_line][LINE_WIDTH - 1] <= 1'b1;
-                    cache[i_index][way_mem_line][LINE_WIDTH - 3] <= 1'b1;
+                    cache[i_index][way_mem_slot][LINE_SIZE_BITS-1:0] <= i_memory_line;
+                    cache[i_index][way_mem_slot][LINE_WIDTH - 1] <= 1'b1;
+                    cache[i_index][way_mem_slot][LINE_WIDTH - 3] <= 1'b1;
                     r_cache_miss <= 1'b0;
                 end
             end
