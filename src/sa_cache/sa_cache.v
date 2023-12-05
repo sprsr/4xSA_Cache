@@ -61,14 +61,6 @@ module SA_Cache
                 .i_b(cache[i_index][i][LINE_WIDTH - 1]),
                 .o_y(mux_sel[i])
             );
-            set_detect #() inst_set_detect (
-                .hit(hit),
-                .set(way_index)
-            );
-            lru_check #() inst_lru_check (
-                .
-            )
-
         end
     endgenerate
    /* 
@@ -95,7 +87,7 @@ module SA_Cache
             end
         end
     endfunction
-*/
+
     function [$clog2(WAYS) -1:0] new_line_way (input [INDEX_BITS-1:0] index);
         new_line_way = 1'b0;
         for (integer i = 0; i< (WAYS); i=i+1) begin
@@ -105,7 +97,7 @@ module SA_Cache
                 cache[index][i][LINE_WIDTH - 1] = 1'b0;
             end
         end
-    endfunction
+    endfunction */
 
     initial begin 
         for (integer i = 0; i < WAYS; i= i+1) begin
@@ -129,6 +121,7 @@ module SA_Cache
                         4'b0010: way_index <= 1;
                         4'b0100: way_index <= 2;
                         4'b1000: way_index <= 3;
+                    endcase
                     case (memRW) 
                         1'b1: begin
                             // Write to Cache
@@ -150,6 +143,29 @@ module SA_Cache
                 end
             end else begin
                 if (i_memory_response) begin
+                    if (!cache[i_index][0][LINE_WIDTH - 1])
+                        way_mem_slot = 2'h0;
+                    else begin 
+                        cache[i_index][0][LINE_WIDTH - 1] = 1'b0;
+                        if (!cache[i_index][1][LINE_WIDTH - 1])
+                            way_mem_slot = 2'h1;
+                        else begin 
+                            cache[i_index][1][LINE_WIDTH - 1] = 1'b0;
+                            if (!cache[i_index][2][LINE_WIDTH - 1])
+                                way_mem_slot = 2'h2;
+                            else begin 
+                                cache[i_index][2][LINE_WIDTH - 1] = 1'b0;
+                                if (!cache[i_index][3][LINE_WIDTH - 1])
+                                way_mem_slot = 2'h3;
+                                else begin 
+                                    cache[i_index][3][LINE_WIDTH - 1] = 1'b0;
+                                    if (!cache[i_index][0][LINE_WIDTH - 1])
+                                    way_mem_slot = 2'h0;
+                                end
+                            end
+                        end
+                    end
+                    
                     way_mem_slot = new_line_way(i_index);
                     if (cache[i_index][way_mem_line][LINE_WIDTH - 1]) begin
                         o_evict_data <= cache[i_index][way_mem_line][LINE_SIZE_BITS-1:0];
