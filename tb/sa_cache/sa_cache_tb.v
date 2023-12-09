@@ -4,8 +4,9 @@ module sa_cache_tb;
     //reset that pulses once
     reg reset = 0;
     reg clk;
-    reg i_tag_in
-    reg i 
+    reg i_tag_in;
+    reg i_index_in;
+    reg i_offset_in;
     reg dataW_in;
     reg i_memory_line_in;
     reg i_memory_response_in;
