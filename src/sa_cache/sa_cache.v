@@ -16,7 +16,6 @@ module SA_Cache
     (
         input                                       clk,
         input                                       rst,
-        input  [ADDRESS_WIDTH - 1:0]                i_addr,
         input  [DATA_WIDTH - 1:0]                   dataW,
         input  [LINE_SIZE_BITS -1:0]                i_memory_line,
         input                                       i_memory_response,
