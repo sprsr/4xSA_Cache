@@ -19,6 +19,7 @@ module sa_cache_tb;
 
     initial begin 
         clk = 1'b0;
+        i_tag_in = 1;
         forever #5 clk = ~clk;
     end
 
