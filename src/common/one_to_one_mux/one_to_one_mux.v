@@ -1,7 +1,7 @@
 // 1-to-1 Multiplexer Module
 
 module one_to_one_mux 
-#( parameter LINE_SIZE_BYTES = 64,
+#( parameter LINE_SIZE_BYTES = 4,
    parameter WAYS     = 4)
 (
   input wire  [(LINE_SIZE_BYTES*8) - 1 : 0] i_data [WAYS - 1: 0],   

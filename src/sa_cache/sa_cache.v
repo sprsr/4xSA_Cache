@@ -2,7 +2,7 @@
 // @sprsr
 module SA_Cache 
 #(  parameter CACHE_LINES = 256,
-    parameter LINE_SIZE_BYTES   = 64,
+    parameter LINE_SIZE_BYTES   = 4,
     parameter LRU_BITS = 1,
     parameter VALID_BITS = 1,
     parameter DIRTY_BITS = 1,
@@ -48,7 +48,9 @@ module SA_Cache
 
     assign cache_miss = r_cache_miss;
 
-
+    initial begin
+        cache[0][0] <=  
+    end
     //Generate comparator for each WAY
     generate
         genvar i;
