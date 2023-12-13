@@ -41,9 +41,11 @@ module sa_cache_tb;
     end
 
     initial begin
-        i_tag_in = 0;
-        i_index_in <= 
-        forever #10 = 
+        i_tag_in    <= 0;
+        i_index_in  <= 0;
+        i_offset_in <= 0;
+        #10 begin
+        end
     initial begin
 
         $dumpfile("sa_cache_tb.vcd");
