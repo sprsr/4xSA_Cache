@@ -29,8 +29,11 @@ module sa_cache_tb;
         .memRW(memRW_in),
         .o_data(o_data_out),
         .line_data(o_line_data),
-
-        ;
+        .cache_miss(cache_miss),
+        .o_evict_data(evict_data),
+        .o_evict_addr(evict_addr),
+        .o_evict(evict)
+    );
 
     initial begin 
         clk = 1'b0;
