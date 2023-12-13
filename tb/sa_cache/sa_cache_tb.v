@@ -4,14 +4,19 @@ module sa_cache_tb;
     //reset that pulses once
     reg reset = 0;
     reg clk;
-    reg [17:0] i_tag_in;
-    reg [7:0]  i_index_in;
-    reg [5:0]  i_offset_in;
-    reg [31:0] dataW_in;
-    reg [52:0 ]i_memory_line_in;
+    reg [17:0]  i_tag_in;
+    reg [7:0]   i_index_in;
+    reg [5:0]   i_offset_in;
+    reg [31:0]  dataW_in;
+    reg [31:0 ] i_memory_line_in;
     reg i_memory_response_in;
     reg memRW_in;
-    reg o_data_out;
+    reg [31:0] o_data_out;
+    reg [31:0] o_line_data;
+    reg        cache_miss;
+    reg [31:0] evict_data;
+    reg [31:0] evict_addr;
+    reg        evict
     sa_cache c0 (
         .clk(clk),
         .rst(reset)
