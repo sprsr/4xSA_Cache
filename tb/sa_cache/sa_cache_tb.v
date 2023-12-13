@@ -24,6 +24,12 @@ module sa_cache_tb;
         .i_index(i_index_in),
         .i_offset(i_offset_in),
         .dataW(dataW_in),
+        .i_memory_line(i_memory_line_in),
+        .i_memory_response(i_memory_response_in),
+        .memRW(memRW_in),
+        .o_data(o_data_out),
+        .line_data(o_line_data),
+
         ;
 
     initial begin 
