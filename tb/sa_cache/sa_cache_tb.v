@@ -19,8 +19,12 @@ module sa_cache_tb;
     reg        evict
     sa_cache c0 (
         .clk(clk),
-        .rst(reset)
-    );
+        .rst(reset),
+        .i_tag(i_tag_in),
+        .i_index(i_index_in),
+        .i_offset(i_offset_in),
+        .dataW(dataW_in),
+        ;
 
     initial begin 
         clk = 1'b0;
