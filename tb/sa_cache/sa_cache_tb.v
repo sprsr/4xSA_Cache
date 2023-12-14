@@ -66,6 +66,15 @@ module sa_cache_tb;
         i_memory_response_in <= 0;
         memRW_in <= 0;
         end
+        #30 begin
+        i_tag_in    <= 0;
+        i_index_in  <= 0;
+        i_offset_in <= 0;
+        dataW_in <= 0;
+        i_memory_line_in <= 0;
+        i_memory_response_in <= 0;
+        memRW_in <= 0;
+        end
     initial begin
 
         $dumpfile("sa_cache_tb.vcd");
