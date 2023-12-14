@@ -47,6 +47,7 @@ module sa_cache_tb;
         dataW_in <= 0;
         i_memory_line_in <= 0;
         i_memory_response_in <= 0;
+        memRW_in <= 0;
 
         #10 begin
         end
