@@ -91,52 +91,7 @@ module sa_cache_tb;
         dataW_in <= 'h0;
         i_memory_line_in <= 'h0;
         i_memory_response_in <= 'h0;
-        memRW_in <= 0;
-        end
-        #60 begin
-        i_tag_in    <= 0;
-        i_index_in  <= 0;
-        i_offset_in <= 0;
-        dataW_in <= 0;
-        i_memory_line_in <= 0;
-        i_memory_response_in <= 0;
-        memRW_in <= 0;
-        end
-        #70 begin
-        i_tag_in    <= 0;
-        i_index_in  <= 0;
-        i_offset_in <= 0;
-        dataW_in <= 0;
-        i_memory_line_in <= 0;
-        i_memory_response_in <= 0;
-        memRW_in <= 0;
-        end
-        #80 begin
-        i_tag_in    <= 0;
-        i_index_in  <= 0;
-        i_offset_in <= 0;
-        dataW_in <= 0;
-        i_memory_line_in <= 0;
-        i_memory_response_in <= 0;
-        memRW_in <= 0;
-        end
-        #90 begin
-        i_tag_in    <= 0;
-        i_index_in  <= 0;
-        i_offset_in <= 0;
-        dataW_in <= 0;
-        i_memory_line_in <= 0;
-        i_memory_response_in <= 0;
-        memRW_in <= 0;
-        end
-        #100 begin
-        i_tag_in    <= 0;
-        i_index_in  <= 0;
-        i_offset_in <= 0;
-        dataW_in <= 0;
-        i_memory_line_in <= 0;
-        i_memory_response_in <= 0;
-        memRW_in <= 0;
+        memRW_in <= 'h'0;
         end
     initial begin
 
