@@ -69,7 +69,7 @@ module sa_cache_tb;
         #30 begin
         i_tag_in    <= 0;
         i_index_in  <= 0;
-        i_offset_in <= 0;
+        i_offset_in <= 12;
         dataW_in <= 0;
         i_memory_line_in <= 0;
         i_memory_response_in <= 0;
