@@ -41,56 +41,56 @@ module sa_cache_tb;
     end
 
     initial begin
-        i_tag_in    <= 0;
-        i_index_in  <= 0;
-        i_offset_in <= 0;
-        dataW_in <= 0;
-        i_memory_line_in <= 0;
-        i_memory_response_in <= 0;
-        memRW_in <= 0;
+        i_tag_in    <= 'h0;
+        i_index_in  <= 'h0;
+        i_offset_in <= 'h0;
+        dataW_in <= 'h0;
+        i_memory_line_in <= 'h0;
+        i_memory_response_in <= 'h0;
+        memRW_in <= 'h0;
         #10 begin
-        i_tag_in    <= 0;
-        i_index_in  <= 0;
-        i_offset_in <= 4;
-        dataW_in <= 0;
-        i_memory_line_in <= 0;
-        i_memory_response_in <= 0;
-        memRW_in <= 0;
+        i_tag_in    <= 'h0;
+        i_index_in  <= 'h0;
+        i_offset_in <= 'h4;
+        dataW_in <= 'h0;
+        i_memory_line_in <= 'h0;
+        i_memory_response_in <= 'h0;
+        memRW_in <= 'h0;
         end
         #20 begin
-        i_tag_in    <= 0;
-        i_index_in  <= 0;
-        i_offset_in <= 8;
-        dataW_in <= 0;
-        i_memory_line_in <= 0;
-        i_memory_response_in <= 0;
-        memRW_in <= 0;
+        i_tag_in    <= 'h0;
+        i_index_in  <= 'h0;
+        i_offset_in <= 'h8;
+        dataW_in <= 'h0;
+        i_memory_line_in <= 'h0;
+        i_memory_response_in <= 'h0;
+        memRW_in <= 'h0;
         end
         #30 begin
-        i_tag_in    <= 0;
-        i_index_in  <= 0;
-        i_offset_in <= 12;
-        dataW_in <= 0;
-        i_memory_line_in <= 0;
-        i_memory_response_in <= 0;
-        memRW_in <= 0;
+        i_tag_in    <= 'h0;
+        i_index_in  <= 'h0;
+        i_offset_in <= 'hc;
+        dataW_in <= 'h0;
+        i_memory_line_in <= 'h0;
+        i_memory_response_in <= 'h0;
+        memRW_in <= 'h0;
         end
         #40 begin
-        i_tag_in    <= 0;
-        i_index_in  <= 0;
-        i_offset_in <= 0;
-        dataW_in <= 0;
-        i_memory_line_in <= 0;
-        i_memory_response_in <= 0;
-        memRW_in <= 0;
+        i_tag_in    <= 'h0;
+        i_index_in  <= 'h0;
+        i_offset_in <= 'h10;
+        dataW_in <= 'h0;
+        i_memory_line_in <= 'h0;
+        i_memory_response_in <= 'h0;
+        memRW_in <= 'h0;
         end
         #50 begin
-        i_tag_in    <= 0;
-        i_index_in  <= 0;
-        i_offset_in <= 0;
-        dataW_in <= 0;
-        i_memory_line_in <= 0;
-        i_memory_response_in <= 0;
+        i_tag_in    <= 'h0;
+        i_index_in  <= 'h0;
+        i_offset_in <= 'h0;
+        dataW_in <= 'h0;
+        i_memory_line_in <= 'h0;
+        i_memory_response_in <= 'h0;
         memRW_in <= 0;
         end
         #60 begin
