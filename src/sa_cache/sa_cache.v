@@ -1,6 +1,6 @@
 // memory.v
 // @sprsr
-module SA_Cache 
+module sa_cache
 #(  parameter CACHE_LINES = 256,
     parameter LINE_SIZE_BYTES   = 4,
     parameter LRU_BITS = 1,
