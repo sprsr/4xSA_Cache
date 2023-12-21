@@ -1,0 +1,319 @@
+$date
+	Thu Dec 21 00:42:11 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module sa_cache_tb $end
+$var wire 32 ! o_line_data [31:0] $end
+$var wire 32 " o_data_out [31:0] $end
+$var wire 32 # evict_data [31:0] $end
+$var wire 32 $ evict_addr [31:0] $end
+$var wire 1 % evict $end
+$var wire 1 & cache_miss $end
+$var reg 1 ' clk $end
+$var reg 32 ( dataW_in [31:0] $end
+$var reg 8 ) i_index_in [7:0] $end
+$var reg 32 * i_memory_line_in [31:0] $end
+$var reg 1 + i_memory_response_in $end
+$var reg 6 , i_offset_in [5:0] $end
+$var reg 18 - i_tag_in [17:0] $end
+$var reg 1 . memRW_in $end
+$var reg 1 / reset $end
+$scope module c0 $end
+$var wire 1 & cache_miss $end
+$var wire 1 ' clk $end
+$var wire 32 0 dataW [31:0] $end
+$var wire 8 1 i_index [7:0] $end
+$var wire 32 2 i_memory_line [31:0] $end
+$var wire 1 + i_memory_response $end
+$var wire 6 3 i_offset [5:0] $end
+$var wire 18 4 i_tag [17:0] $end
+$var wire 1 . memRW $end
+$var wire 1 / rst $end
+$var wire 4 5 mux_sel [3:0] $end
+$var wire 32 6 line_data [31:0] $end
+$var wire 4 7 hit [3:0] $end
+$var reg 32 8 o_data [31:0] $end
+$var reg 1 % o_evict $end
+$var reg 32 9 o_evict_addr [31:0] $end
+$var reg 32 : o_evict_data [31:0] $end
+$var reg 1 ; r_cache_miss $end
+$var reg 2 < way_index [1:0] $end
+$var reg 3 = way_mem_slot [2:0] $end
+$scope function find_hit $end
+$var reg 4 > hit [3:0] $end
+$scope begin $ivl_for_loop0 $end
+$var integer 32 ? i [31:0] $end
+$upscope $end
+$upscope $end
+$scope function new_line_way $end
+$var reg 8 @ index [7:0] $end
+$scope begin $ivl_for_loop1 $end
+$var integer 32 A i [31:0] $end
+$upscope $end
+$upscope $end
+$scope begin genblk1[0] $end
+$scope module u_inst_and $end
+$var wire 1 B i_a $end
+$var wire 1 C i_b $end
+$var wire 1 D o_y $end
+$upscope $end
+$scope module u_inst_comparator $end
+$var wire 18 E i_a [17:0] $end
+$var wire 18 F i_b [17:0] $end
+$var wire 1 G o_y $end
+$upscope $end
+$upscope $end
+$scope begin genblk1[1] $end
+$scope module u_inst_and $end
+$var wire 1 H i_a $end
+$var wire 1 I i_b $end
+$var wire 1 J o_y $end
+$upscope $end
+$scope module u_inst_comparator $end
+$var wire 18 K i_a [17:0] $end
+$var wire 18 L i_b [17:0] $end
+$var wire 1 M o_y $end
+$upscope $end
+$upscope $end
+$scope begin genblk1[2] $end
+$scope module u_inst_and $end
+$var wire 1 N i_a $end
+$var wire 1 O i_b $end
+$var wire 1 P o_y $end
+$upscope $end
+$scope module u_inst_comparator $end
+$var wire 18 Q i_a [17:0] $end
+$var wire 18 R i_b [17:0] $end
+$var wire 1 S o_y $end
+$upscope $end
+$upscope $end
+$scope begin genblk1[3] $end
+$scope module u_inst_and $end
+$var wire 1 T i_a $end
+$var wire 1 U i_b $end
+$var wire 1 V o_y $end
+$upscope $end
+$scope module u_inst_comparator $end
+$var wire 18 W i_a [17:0] $end
+$var wire 18 X i_b [17:0] $end
+$var wire 1 Y o_y $end
+$upscope $end
+$upscope $end
+$scope module inst_one_to_one_mux $end
+$var wire 4 Z i_sel [3:0] $end
+$var wire 32 [ o_y [31:0] $end
+$var reg 32 \ r_y [31:0] $end
+$scope begin $ivl_for_loop3 $end
+$var integer 32 ] i [31:0] $end
+$upscope $end
+$upscope $end
+$scope begin $ivl_for_loop2 $end
+$var integer 32 ^ i [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b100 ^
+b100 ]
+bx \
+bx [
+bx01 Z
+xY
+b0 X
+bx W
+xV
+xU
+xT
+xS
+b0 R
+bx Q
+xP
+xO
+xN
+0M
+b0 L
+b100 K
+0J
+1I
+0H
+1G
+b0 F
+b0 E
+1D
+1C
+1B
+bx A
+bx @
+bx ?
+bx >
+bx =
+bx <
+0;
+bx :
+bx 9
+bx 8
+bx01 7
+bx 6
+bx01 5
+b0 4
+b0 3
+b0 2
+b0 1
+b0 0
+0/
+0.
+b0 -
+b0 ,
+0+
+b0 *
+b0 )
+b0 (
+0'
+0&
+x%
+bx $
+bx #
+bx "
+bx !
+$end
+#5
+b0 "
+b0 8
+b0 <
+b100 ?
+bx01 >
+1'
+#10
+b0 =
+b100 ,
+b100 3
+0'
+1/
+#15
+1'
+#20
+0'
+#22
+0/
+#25
+bx101000000000000000000 "
+bx101000000000000000000 8
+b100 ?
+1'
+#30
+b1000 ,
+b1000 3
+0'
+#35
+bx "
+bx 8
+b100 ?
+1'
+#40
+0'
+#45
+b100 ?
+1'
+#50
+0'
+#55
+b100 ?
+1'
+#60
+b1100 ,
+b1100 3
+0'
+#65
+b100 ?
+1'
+#70
+0'
+#75
+b100 ?
+1'
+#80
+0'
+#85
+b100 ?
+1'
+#90
+0'
+#95
+b100 ?
+1'
+#100
+b10000 ,
+b10000 3
+0'
+#105
+b100 ?
+1'
+#110
+0'
+#115
+b100 ?
+1'
+#120
+0'
+#125
+b100 ?
+1'
+#130
+0'
+#135
+b100 ?
+1'
+#140
+0'
+#145
+b100 ?
+1'
+#150
+b0 ,
+b0 3
+0'
+#155
+b0 "
+b0 8
+b100 ?
+1'
+#160
+0'
+#165
+b100 ?
+1'
+#170
+0'
+#175
+b100 ?
+1'
+#180
+0'
+#185
+b100 ?
+1'
+#190
+0'
+#195
+b100 ?
+1'
+#200
+0'
+#205
+b100 ?
+1'
+#210
+0'
+#215
+b100 ?
+1'
+#220
+0'
+#222
