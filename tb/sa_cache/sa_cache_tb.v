@@ -16,7 +16,7 @@ module sa_cache_tb;
     reg        cache_miss;
     reg [31:0] evict_data;
     reg [31:0] evict_addr;
-    reg        evict
+    reg        evict;
     sa_cache c0 (
         .clk(clk),
         .rst(reset),
@@ -91,8 +91,10 @@ module sa_cache_tb;
         dataW_in <= 'h0;
         i_memory_line_in <= 'h0;
         i_memory_response_in <= 'h0;
-        memRW_in <= 'h'0;
+        memRW_in <= 'h0;
         end
+    end
+
     initial begin
 
         $dumpfile("sa_cache_tb.vcd");
