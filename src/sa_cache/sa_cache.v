@@ -75,21 +75,21 @@ module sa_cache
                 .o_y(mux_sel[i])
             );
 
-            data[i] = cache[i_index][i][LINE_SIZE_BITS -1:0];
         end
     endgenerate
 
-   /* 
     mux_4x1 #() inst_mux_4x1 (
-        .i_data(data),
+        .i_data(cache[i_index]),
         .i_sel(mux_sel),
-        .o_y(o_data)
-    );*/
+        .o_y(data)
+    );
+
+   /* 
     one_to_one_mux #() inst_one_to_one_mux (
         .i_data(data),
         .i_sel(mux_sel),
         .o_y(line_data)
-    );
+    );*/
 
     function find_hit(input [WAYS-1:0] hit);
         find_hit = 0;
@@ -111,11 +111,13 @@ module sa_cache
         end
     endfunction 
 
+    /*
     initial begin 
         for (integer i = 0; i < WAYS; i= i+1) begin
             data[i] = cache[i_index][i][LINE_SIZE_BITS - 1: 0];
         end
     end
+    */
 
 
     always @(posedge clk or posedge rst) begin
