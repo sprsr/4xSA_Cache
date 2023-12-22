@@ -1,28 +1,33 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Fri Dec 22 03:19:56 2023
+[*] Fri Dec 22 06:57:41 2023
 [*]
 [dumpfile] "/home/sp/repos/4xSA_Cache/run/sa_cache_tb.vcd"
-[dumpfile_mtime] "Fri Dec 22 03:19:34 2023"
-[dumpfile_size] 4063
+[dumpfile_mtime] "Fri Dec 22 06:55:23 2023"
+[dumpfile_size] 3991
 [savefile] "/home/sp/repos/4xSA_Cache/run/cache_waveform.gtkw"
 [timestart] 0
 [size] 1401 600
-[pos] 33943 33222
-*-6.087204 5 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] -1 -1
+*-6.087204 35 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] genblk1[0].
+[treeopen] genblk1[1].
+[treeopen] genblk1[2].
+[treeopen] genblk1[3].
 [treeopen] sa_cache_tb.
-[treeopen] sa_cache_tb.c0.
 [sst_width] 214
-[signals_width] 256
+[signals_width] 261
 [sst_expanded] 1
-[sst_vpaned_height] 195
+[sst_vpaned_height] 319
 @28
 sa_cache_tb.c0.clk
 sa_cache_tb.reset
 @22
 sa_cache_tb.c0.find_hit.hit[3:0]
-@421
+@420
 sa_cache_tb.c0.find_hit.i
+@23
+inst_one_to_one_mux.i_sel[3:0]
 @22
 sa_cache_tb.c0.i_tag[17:0]
 sa_cache_tb.c0.i_index[7:0]
