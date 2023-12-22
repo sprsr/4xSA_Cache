@@ -1,18 +1,19 @@
 module mux_4x_1 
 #( 
+   parameter WAYS = 4,
    parameter LINE_SIZE_BYTES = 4,
    parameter LRU_BITS = 1,
    parameter VALID_BITS = 1,
    parameter DIRTY_BITS = 1,
-   parameter TAG_BITS = 18,
+   parameter TAG_BITS = 18
 )
 (
   input [(VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SIZE_BYTES * 8))- 1 : 0]  i_data [0: WAYS-1],
   input [3: 0]      i_sel,
-  output [LINE_SIZE_BITS - 1 : 0] o_y 
+  output [(LINE_SIZE_BYTES * 8) - 1 : 0] o_y 
 );
 
-reg [LINE_SIZE_BITS - 1 : 0] r_y;
+reg [(LINE_SIZE_BYTES * 8) - 1 : 0] r_y;
 assign o_y = r_y;
 
 always @(*) begin
