@@ -81,14 +81,15 @@ module sa_cache
     mux_4x1 #() inst_mux_4x1 (
         .i_data(cache[i_index]),
         .i_sel(mux_sel),
-        .o_y(data)
+        .o_y(line_data)
     );
 
+   /* 
     one_to_one_mux #() inst_one_to_one_mux (
         .i_data(data),
         .i_sel(mux_sel),
         .o_y(line_data)
-    );
+    );/
 
     function find_hit(input [WAYS-1:0] hit);
         find_hit = 0;
