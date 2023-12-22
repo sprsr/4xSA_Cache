@@ -41,6 +41,7 @@ module sa_cache_tb;
     end
 
     initial begin
+        #30
         i_tag_in    <= 'h0;
         i_index_in  <= 'h0;
         i_offset_in <= 'h0;
@@ -57,7 +58,7 @@ module sa_cache_tb;
         i_memory_response_in <= 'h0;
         memRW_in <= 'h0;
         end
-        #20 begin
+        #10 begin
         i_tag_in    <= 'h0;
         i_index_in  <= 'h0;
         i_offset_in <= 'h8;
@@ -66,7 +67,7 @@ module sa_cache_tb;
         i_memory_response_in <= 'h0;
         memRW_in <= 'h0;
         end
-        #30 begin
+        #10 begin
         i_tag_in    <= 'h0;
         i_index_in  <= 'h0;
         i_offset_in <= 'hc;
@@ -75,7 +76,7 @@ module sa_cache_tb;
         i_memory_response_in <= 'h0;
         memRW_in <= 'h0;
         end
-        #40 begin
+        #10 begin
         i_tag_in    <= 'h0;
         i_index_in  <= 'h0;
         i_offset_in <= 'h10;
@@ -84,7 +85,7 @@ module sa_cache_tb;
         i_memory_response_in <= 'h0;
         memRW_in <= 'h0;
         end
-        #50 begin
+        #10 begin
         i_tag_in    <= 'h0;
         i_index_in  <= 'h0;
         i_offset_in <= 'h0;
@@ -101,7 +102,7 @@ module sa_cache_tb;
         $dumpvars(0,sa_cache_tb);
 
         # 10 reset = 1'b1;
-        # 12 reset = 1'b0;
+        # 10 reset = 1'b0;
         # 200 $finish;
     end
 
