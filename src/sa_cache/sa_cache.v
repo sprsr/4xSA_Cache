@@ -68,13 +68,17 @@ module sa_cache
                 .i_b(i_tag),
                 .o_y(hit[i])
             );
+
             AND #() u_inst_and (
                 .i_a(hit[i]),
                 .i_b(cache[i_index][i][LINE_WIDTH - 1]),
                 .o_y(mux_sel[i])
             );
+
+            data[i] = cache[i_index][i][LINE_SIZE_BITS -1:0];
         end
     endgenerate
+
    /* 
     mux_4x1 #() inst_mux_4x1 (
         .i_data(data),
