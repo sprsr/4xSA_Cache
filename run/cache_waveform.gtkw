@@ -1,14 +1,14 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Sat Dec 23 06:10:00 2023
+[*] Sat Dec 23 06:11:14 2023
 [*]
 [dumpfile] "/home/sp/repos/4xSA_Cache/run/sa_cache_tb.vcd"
 [dumpfile_mtime] "Fri Dec 22 17:15:29 2023"
 [dumpfile_size] 3991
 [savefile] "/home/sp/repos/4xSA_Cache/run/cache_waveform.gtkw"
 [timestart] 1
-[size] 1181 1134
-[pos] 28 87
+[size] 1181 1275
+[pos] 437 -24
 *-6.087204 35 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] genblk1[0].
 [treeopen] genblk1[1].
@@ -19,7 +19,7 @@
 [sst_width] 214
 [signals_width] 261
 [sst_expanded] 1
-[sst_vpaned_height] 711
+[sst_vpaned_height] 814
 @28
 sa_cache_tb.c0.clk
 sa_cache_tb.reset
@@ -93,7 +93,21 @@ genblk1[2].u_inst_and.o_y
 @22
 genblk1[2].u_inst_comparator.i_a[17:0]
 genblk1[2].u_inst_comparator.i_b[17:0]
-@29
+@28
 genblk1[2].u_inst_comparator.o_y
+@200
+-WAY 4
+-AND
+@28
+genblk1[3].u_inst_and.i_a
+genblk1[3].u_inst_and.i_b
+genblk1[3].u_inst_and.o_y
+@200
+-COMPARATOR
+@22
+genblk1[3].u_inst_comparator.i_a[17:0]
+genblk1[3].u_inst_comparator.i_b[17:0]
+@29
+genblk1[3].u_inst_comparator.o_y
 [pattern_trace] 1
 [pattern_trace] 0
