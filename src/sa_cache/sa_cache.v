@@ -89,7 +89,7 @@ module sa_cache
         .i_data(data),
         .i_sel(mux_sel),
         .o_y(line_data)
-    );/
+    );*/
 
     function find_hit(input [WAYS-1:0] hit);
         find_hit = 0;
