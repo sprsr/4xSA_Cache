@@ -1,13 +1,13 @@
 [*]
 [*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
-[*] Fri Dec 22 06:57:41 2023
+[*] Sat Dec 23 05:51:28 2023
 [*]
 [dumpfile] "/home/sp/repos/4xSA_Cache/run/sa_cache_tb.vcd"
-[dumpfile_mtime] "Fri Dec 22 06:55:23 2023"
+[dumpfile_mtime] "Fri Dec 22 17:15:29 2023"
 [dumpfile_size] 3991
 [savefile] "/home/sp/repos/4xSA_Cache/run/cache_waveform.gtkw"
 [timestart] 0
-[size] 1401 600
+[size] 1181 782
 [pos] -1 -1
 *-6.087204 35 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] genblk1[0].
@@ -15,10 +15,11 @@
 [treeopen] genblk1[2].
 [treeopen] genblk1[3].
 [treeopen] sa_cache_tb.
+[treeopen] sa_cache_tb.c0.
 [sst_width] 214
 [signals_width] 261
 [sst_expanded] 1
-[sst_vpaned_height] 319
+[sst_vpaned_height] 454
 @28
 sa_cache_tb.c0.clk
 sa_cache_tb.reset
@@ -26,9 +27,8 @@ sa_cache_tb.reset
 sa_cache_tb.c0.find_hit.hit[3:0]
 @420
 sa_cache_tb.c0.find_hit.i
-@23
-inst_one_to_one_mux.i_sel[3:0]
 @22
+inst_one_to_one_mux.i_sel[3:0]
 sa_cache_tb.c0.i_tag[17:0]
 sa_cache_tb.c0.i_index[7:0]
 sa_cache_tb.c0.i_offset[5:0]
@@ -53,9 +53,12 @@ genblk1[0].u_inst_comparator.i_b[17:0]
 genblk1[0].u_inst_comparator.o_y
 @420
 inst_one_to_one_mux.i
-@22
-inst_one_to_one_mux.i_sel[3:0]
-inst_one_to_one_mux.o_y[31:0]
-inst_one_to_one_mux.r_y[31:0]
+@200
+-Mux_sel
+@28
+genblk1[0].u_inst_and.o_y
+genblk1[1].u_inst_and.o_y
+genblk1[2].u_inst_and.o_y
+genblk1[3].u_inst_and.o_y
 [pattern_trace] 1
 [pattern_trace] 0
