@@ -24,7 +24,7 @@ module sa_cache
         input                                       i_memory_response,
         input                                       memRW,
         output reg [DATA_WIDTH - 1:0]                   o_data,
-        output reg [(LINE_SIZE_BITS -1): 0]         line_data,
+        output reg [((LINE_SIZE_BYTES*8) -1): 0]         line_data,
         output                                      cache_miss,
         output reg [DATA_WIDTH -1:0]                    o_evict_data,
         output reg [ADDRESS_WIDTH -1:0]                    o_evict_addr,
