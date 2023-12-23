@@ -1,4 +1,4 @@
-module mux_4x_1 
+module mux_4x1 
 #( 
    parameter WAYS = 4,
    parameter LINE_SIZE_BYTES = 4,
@@ -9,7 +9,7 @@ module mux_4x_1
 )
 (
   input [(VALID_BITS + LRU_BITS + DIRTY_BITS + TAG_BITS + (LINE_SIZE_BYTES * 8))- 1 : 0]  i_data [0: WAYS-1],
-  input [3: 0]      i_sel,
+  input [WAYS - 1: 0]      i_sel,
   output [(LINE_SIZE_BYTES * 8) - 1 : 0] o_y 
 );
 
