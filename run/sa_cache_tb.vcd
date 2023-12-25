@@ -1,5 +1,5 @@
 $date
-	Fri Dec 22 11:15:29 2023
+	Sun Dec 24 22:52:38 2023
 $end
 $version
 	Icarus Verilog
@@ -65,7 +65,7 @@ $upscope $end
 $scope module u_inst_comparator $end
 $var wire 18 E i_a [17:0] $end
 $var wire 18 F i_b [17:0] $end
-$var wire 1 G o_y $end
+$var reg 1 G o_y $end
 $upscope $end
 $upscope $end
 $scope begin genblk1[1] $end
@@ -77,7 +77,7 @@ $upscope $end
 $scope module u_inst_comparator $end
 $var wire 18 K i_a [17:0] $end
 $var wire 18 L i_b [17:0] $end
-$var wire 1 M o_y $end
+$var reg 1 M o_y $end
 $upscope $end
 $upscope $end
 $scope begin genblk1[2] $end
@@ -89,7 +89,7 @@ $upscope $end
 $scope module u_inst_comparator $end
 $var wire 18 Q i_a [17:0] $end
 $var wire 18 R i_b [17:0] $end
-$var wire 1 S o_y $end
+$var reg 1 S o_y $end
 $upscope $end
 $upscope $end
 $scope begin genblk1[3] $end
@@ -101,54 +101,46 @@ $upscope $end
 $scope module u_inst_comparator $end
 $var wire 18 W i_a [17:0] $end
 $var wire 18 X i_b [17:0] $end
-$var wire 1 Y o_y $end
+$var reg 1 Y o_y $end
 $upscope $end
 $upscope $end
-$scope module inst_one_to_one_mux $end
+$scope module inst_mux_4x1 $end
 $var wire 4 Z i_sel [3:0] $end
 $var wire 32 [ o_y [31:0] $end
 $var reg 32 \ r_y [31:0] $end
-$scope begin $ivl_for_loop3 $end
-$var integer 32 ] i [31:0] $end
-$upscope $end
-$upscope $end
-$scope begin $ivl_for_loop2 $end
-$var integer 32 ^ i [31:0] $end
 $upscope $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
 #0
 $dumpvars
-b100 ^
-bx ]
 bx \
 bx [
-bx Z
-xY
+b0 Z
+0Y
 bx X
 bx W
-xV
+0V
 xU
-xT
-xS
+0T
+0S
 bx R
 bx Q
-xP
+0P
 xO
-xN
-xM
+0N
+0M
 bx L
 bx K
-xJ
+0J
 xI
-xH
-xG
+0H
+0G
 bx F
 bx E
-xD
+0D
 xC
-xB
+0B
 bx A
 bx @
 bx ?
@@ -159,9 +151,9 @@ bx <
 bx :
 bx 9
 bx 8
-bx 7
+b0 7
 bx 6
-bx 5
+b0 5
 bx 4
 bx 3
 bx 2
@@ -205,18 +197,18 @@ b0 8
 1;
 1'
 #30
-b100 ]
+bz !
+bz 6
+bz [
+bz \
+b1 5
+b1 Z
 1D
-bx01 5
-bx01 Z
-0J
 1B
-0H
+b1 7
 1G
 b0 E
 1C
-bx01 7
-0M
 b100 K
 1I
 0.
