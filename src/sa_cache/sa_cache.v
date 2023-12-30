@@ -79,7 +79,10 @@ module sa_cache
     endgenerate
 
     mux_4x1 #() inst_mux_4x1 (
-        .i_data(cache[i_index]),
+        .i_data(cache[i_index][0]),
+        .i_data(cache[i_index][1]),
+        .i_data(cache[i_index][2]),
+        .i_data(cache[i_index][3]),
         .i_sel(mux_sel),
         .o_y(line_data)
     );
